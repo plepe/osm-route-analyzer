@@ -4,8 +4,10 @@
   "description": "Analyzes bike routes of OSM data",
   "main": "index.js",
   "scripts": {
+    "build": "browserify src/app.js -o dist/app.js",
     "cli": "node cli.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "watchify --debug src/app.js -o dist/app.js -v"
   },
   "author": "Stephan Bösch-Plepelits <skunk@xover.mud.at>",
   "license": "GPL-3.0",
@@ -14,7 +16,10 @@
     "@turf/length": "^7.4.0",
     "js-yaml": "^5.5.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "browserify": "^17.0.1",
+    "watchify": "^4.0.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/plepe/osm-route-analyzer.git"

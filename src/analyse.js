@@ -3,7 +3,7 @@ const turf = {
   length: require('@turf/length').default
 }
 
-module.exports = function analyze (def, data, callback) {
+module.exports = function analyse (def, data, callback) {
   let totalLength = 0
   let groups = {}
 

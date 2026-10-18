@@ -19,7 +19,7 @@ module.exports = function run (config, id, callback) {
         return console.error(err)
       }
 
-      global.setTimeout(() => analyze(def, data, callback), 0)
+      global.setTimeout(() => analyse(def, data, callback), 0)
     }
   )
 }

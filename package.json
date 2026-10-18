@@ -14,7 +14,8 @@
   "dependencies": {
     "@geowiki-net/geowiki-api": "^4.0.0-rc.1",
     "@turf/length": "^7.4.0",
-    "js-yaml": "^5.5.0"
+    "js-yaml": "^5.5.0",
+    "twig": "^3.0.0"
   },
   "devDependencies": {
     "browserify": "^17.0.1",

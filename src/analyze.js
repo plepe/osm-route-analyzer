@@ -1,39 +1,27 @@
+const twigRender = require('./twigRender')
 const turf = {
   length: require('@turf/length').default
 }
 
-module.exports = function analyze (data, callback) {
+module.exports = function analyze (def, data, callback) {
   let totalLength = 0
   let groups = {}
 
   data.features.forEach(feature => {
     const length = turf.length(feature)
-    totalLength += length
 
-    const tags = feature.properties
+    const data = {
+      tags: feature.properties
+    }
 
-    group = 'other'
-    if (tags.highway) {
-      group = tags.highway
-    }
-    if (tags.highway == 'cycleway') {
-      if (tags.segregated == 'no') {
-        group = 'mixed'
-      } else {
-        group = 'cycleway'
-      }
-    }
+    const group = twigRender(def.feature.group, data)
 
     if (!(group in groups)) {
       groups[group] = 0
     }
 
     groups[group] += length
-
-    //console.log(feature.id, group, length)
   })
 
   callback(null, groups)
-//
-//  console.log('total:', totalLength.toFixed(3) + 'km')
 }

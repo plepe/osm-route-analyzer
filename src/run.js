@@ -3,6 +3,11 @@ const GeowikiAPI = require('@geowiki-net/geowiki-api')
 const analyze = require('./analyze.js')
 
 let geowiki
+const def = {
+  feature: {
+    'group': '{{ (tags.highway == "cycleway" and tags.segregated == "no" ? "mixed" : tags.highway)|default("other") }}'
+  }
+}
 
 module.exports = function run (config, id, callback) {
   geowiki = new GeowikiAPI(config.overpassServer)
@@ -14,7 +19,7 @@ module.exports = function run (config, id, callback) {
         return console.error(err)
       }
 
-      global.setTimeout(() => analyze(data, callback), 0)
+      global.setTimeout(() => analyze(def, data, callback), 0)
     }
   )
 }

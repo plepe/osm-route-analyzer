@@ -1,2 +1,8 @@
 overpassServer: https://overpass-api.de/api/interpreter
 id: 22216
+
+analyses:
+  infra_type:
+    feature:
+      group: |
+        {{ (tags.highway == "cycleway" and tags.segregated == "no" ? "mixed" : tags.highway)|default("other") }}

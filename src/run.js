@@ -1,4 +1,5 @@
 const GeowikiAPI = require('@geowiki-net/geowiki-api')
+const async = require('async')
 
 const analyse = require('./analyse.js')
 const twigRender = require('./twigRender')
@@ -7,8 +8,9 @@ let geowiki
 
 module.exports = function run (config, id, callback) {
   geowiki = new GeowikiAPI(config.overpassServer)
+  const result = {}
 
-  Object.entries(config.analyses).forEach(([analyseId, def]) => {
+  async.eachOf(config.analyses, (def, analyseId, done) => {
     const data = {
       'this': 'relation(' + id + ')'
     }
@@ -22,8 +24,14 @@ module.exports = function run (config, id, callback) {
           return console.error(err)
         }
 
-        global.setTimeout(() => analyse(def, data, callback), 0)
+        global.setTimeout(() => analyse(def, data, (err, r) => {
+          if (err) { return done(err) }
+          result[analyseId] = r
+          done()
+        }), 0)
       }
     )
+  }, (err) => {
+    callback(err, result)
   })
 }

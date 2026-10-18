@@ -18,8 +18,11 @@ function app () {
 }
 
 function print (err, result) {
-  Object.entries(result).forEach(([group, length]) => {
-    console.log(group + ':', length.toFixed(3) + ' km')
+  Object.entries(result).forEach(([analyseId, groups]) => {
+    console.log('* ' + analyseId)
+    Object.entries(groups).forEach(([group, length]) => {
+      console.log(group + ':', length.toFixed(3) + ' km')
+    })
   })
 }
 

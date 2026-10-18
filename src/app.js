@@ -10,23 +10,36 @@ window.onload = function app () {
       config = yaml.load(body)
 
       run(config, config.id, (err, result) => {
-        const table = document.createElement('table')
+        Object.entries(result).forEach(([analyseId, groups]) => {
+          const div = document.createElement('div')
+          const h1 = document.createElement('h1')
+          h1.innerHTML = analyseId
+          div.appendChild(h1)
 
-        Object.entries(result).forEach(([group, length]) => {
-          const tr = document.createElement('tr')
+          showResult(div, groups)
 
-          let td = document.createElement('td')
-          td.innerHTML = group
-          tr.appendChild(td)
-
-          td = document.createElement('td')
-          td.innerHTML = length.toFixed(3) + ' km'
-          tr.appendChild(td)
-
-          table.appendChild(tr)
+          document.body.appendChild(div)
         })
-
-        document.body.appendChild(table)
       })
     })
+}
+
+function showResult (dom, result) {
+  const table = document.createElement('table')
+
+  Object.entries(result).forEach(([group, length]) => {
+    const tr = document.createElement('tr')
+
+    let td = document.createElement('td')
+    td.innerHTML = group
+    tr.appendChild(td)
+
+    td = document.createElement('td')
+    td.innerHTML = length.toFixed(3) + ' km'
+    tr.appendChild(td)
+
+    table.appendChild(tr)
+  })
+
+  dom.appendChild(table)
 }

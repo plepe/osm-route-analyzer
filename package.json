@@ -4,14 +4,15 @@
   "description": "Analyzes bike routes of OSM data",
   "main": "index.js",
   "scripts": {
-    "run": "node src/run.js",
+    "cli": "node cli.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Stephan Bösch-Plepelits <skunk@xover.mud.at>",
   "license": "GPL-3.0",
   "dependencies": {
     "@geowiki-net/geowiki-api": "^4.0.0-rc.1",
-    "@turf/length": "^7.4.0"
+    "@turf/length": "^7.4.0",
+    "js-yaml": "^5.5.0"
   },
   "devDependencies": {},
   "repository": {

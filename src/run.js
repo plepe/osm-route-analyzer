@@ -3,10 +3,11 @@ const turf = {
   length: require('@turf/length').default
 }
 
-const geowiki = new GeowikiAPI()
-const id = 22216
+let geowiki
 
-function run (config) {
+module.exports = function run (config, id) {
+  geowiki = new GeowikiAPI(config.overpassServer)
+
   geowiki.query(
     '[out:geojson];relation(' + id + ');way(r);out geom;',
     (err, data) => {

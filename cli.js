@@ -13,7 +13,13 @@ function app () {
 
     config = yaml.load(body)
 
-    run(config, config.id)
+    run(config, config.id, print)
+  })
+}
+
+function print (err, result) {
+  Object.entries(result).forEach(([group, length]) => {
+    console.log(group + ':', length.toFixed(3) + ' km')
   })
 }
 

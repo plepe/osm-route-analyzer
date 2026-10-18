@@ -5,7 +5,7 @@ const turf = {
 
 let geowiki
 
-module.exports = function run (config, id) {
+module.exports = function run (config, id, callback) {
   geowiki = new GeowikiAPI(config.overpassServer)
 
   geowiki.query(
@@ -15,12 +15,12 @@ module.exports = function run (config, id) {
         return console.error(err)
       }
 
-      global.setTimeout(() => analyze(data), 0)
+      global.setTimeout(() => analyze(data, callback), 0)
     }
   )
 }
 
-function analyze (data) {
+function analyze (data, callback) {
   let totalLength = 0
   let groups = {}
 
@@ -51,9 +51,7 @@ function analyze (data) {
     //console.log(feature.id, group, length)
   })
 
-  Object.entries(groups).forEach(([group, length]) => {
-    console.log(group + ':', length.toFixed(3) + ' km')
-  })
-
-  console.log('total:', totalLength.toFixed(3) + 'km')
+  callback(null, groups)
+//
+//  console.log('total:', totalLength.toFixed(3) + 'km')
 }

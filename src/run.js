@@ -57,5 +57,3 @@ function analyze (data) {
 
   console.log('total:', totalLength.toFixed(3) + 'km')
 }
-
-run()

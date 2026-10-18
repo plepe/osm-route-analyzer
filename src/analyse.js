@@ -14,7 +14,7 @@ module.exports = function analyse (def, data, callback) {
       tags: feature.properties
     }
 
-    const group = twigRender(def.feature.group, data)
+    const group = twigRender(def.feature.group, data).trim()
 
     if (!(group in groups)) {
       groups[group] = 0

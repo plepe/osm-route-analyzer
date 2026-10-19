@@ -1,27 +1,32 @@
-const yaml = require('js-yaml')
 const run = require('./run.js')
 
-let config
+import App from '@geowiki-net/geowiki-lib-app'
 
-window.onload = function app () {
-  fetch('config.yaml')
-    .then(req => req.text())
-    .then(body => {
-      config = yaml.load(body)
+App.modules = [...App.modules, require('./config.js'), ...require('../modules.js')]
 
-      run(config, config.id, (err, result) => {
-        Object.entries(result).forEach(([analyseId, groups]) => {
-          const div = document.createElement('div')
-          const h1 = document.createElement('h1')
-          h1.innerHTML = analyseId
-          div.appendChild(h1)
+const app = new App()
 
-          showResult(div, groups)
+app.initModules(() => {
+  app.loadCssFiles()
 
-          document.body.appendChild(div)
-        })
-      })
+  app.on('init', init)
+
+  app.init(app.getInitState())
+})
+
+function init () {
+  run(app.config, app.config.id, (err, result) => {
+    Object.entries(result).forEach(([analyseId, groups]) => {
+      const div = document.createElement('div')
+      const h1 = document.createElement('h1')
+      h1.innerHTML = analyseId
+      div.appendChild(h1)
+
+      showResult(div, groups)
+
+      document.body.appendChild(div)
     })
+  })
 }
 
 function showResult (dom, result) {

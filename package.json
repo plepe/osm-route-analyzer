@@ -3,21 +3,24 @@
   "version": "0.0.0",
   "description": "Analyzes bike routes of OSM data",
   "main": "index.js",
+  "type": "module",
   "browser": {
     "./src/loadAnalyse.js": "./src/loadAnalyse-browser.js"
   },
   "scripts": {
-    "build": "browserify src/app.js -o dist/app.js",
+    "build": "browserify -p esmify src/app.js -o dist/app.js",
     "cli": "node cli.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "watchify --debug src/app.js -o dist/app.js -v"
+    "watch": "watchify -p esmify --debug src/app.js -o dist/app.js -v"
   },
   "author": "Stephan Bösch-Plepelits <skunk@xover.mud.at>",
   "license": "GPL-3.0",
   "dependencies": {
     "@geowiki-net/geowiki-api": "^4.0.0-rc.1",
+    "@geowiki-net/geowiki-lib-app": "github:geowiki-net/geowiki-lib-app",
     "@turf/length": "^7.4.0",
     "async": "^3.2.6",
+    "esmify": "^2.1.1",
     "js-yaml": "^5.5.0",
     "twig": "^3.0.0"
   },

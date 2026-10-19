@@ -9,13 +9,19 @@ const app = new App()
 app.initModules(() => {
   app.loadCssFiles()
 
-  app.on('init', init)
+  app.on('state-apply', init)
 
   app.init(app.getInitState())
 })
 
 function init () {
-  run(app.config, app.config.id, (err, result) => {
+  const id = app.state.current.id
+
+  if (!id) {
+    return
+  }
+
+  run(app.config, id, (err, result) => {
     Object.entries(result).forEach(([analyseId, groups]) => {
       const div = document.createElement('div')
       const h1 = document.createElement('h1')

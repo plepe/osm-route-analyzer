@@ -3,6 +3,9 @@
   "version": "0.0.0",
   "description": "Analyzes bike routes of OSM data",
   "main": "index.js",
+  "browser": {
+    "./src/loadAnalyse.js": "./src/loadAnalyse-browser.js"
+  },
   "scripts": {
     "build": "browserify src/app.js -o dist/app.js",
     "cli": "node cli.js",

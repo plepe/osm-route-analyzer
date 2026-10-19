@@ -1,0 +1,4 @@
+chooseAnalyser: |-
+  {% if tags.route == 'bicycle' %}
+  bike_route
+  {% endif %}

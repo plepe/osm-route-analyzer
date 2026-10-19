@@ -1,0 +1,7 @@
+analyses:
+  infra_type:
+    query: |
+      {{ this }};way(r);out geom;
+    feature:
+      group: |
+        {{ (tags.highway == "cycleway" and tags.segregated == "no" ? "mixed" : tags.highway)|default("other") }}

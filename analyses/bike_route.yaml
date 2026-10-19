@@ -1,4 +1,10 @@
 analyses:
+  main:
+    query: |
+      {{ this }};out geom;
+    feature:
+      group: total
+
   infra_type:
     query: |
       {{ this }};way(r);out geom;
@@ -13,3 +19,10 @@ analyses:
         {% else %}
         other
         {% endif %}
+
+  surface:
+    query: |
+      {{ this }};way(r);out geom;
+    feature:
+      group: |
+        {{ tags.surface|default('unknown') }}

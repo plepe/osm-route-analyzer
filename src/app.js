@@ -2,7 +2,12 @@ const run = require('./run.js')
 
 import App from '@geowiki-net/geowiki-lib-app'
 
-App.modules = [...App.modules, require('./config.js'), ...require('../modules.js')]
+App.modules = [
+  ...App.modules,
+  require('./config.js'),
+  require('./geowiki.js'),
+  ...require('../modules.js')
+]
 
 const app = new App()
 
@@ -21,7 +26,7 @@ function init () {
     return
   }
 
-  run(app.config, id, (err, result) => {
+  run(app, id, (err, result) => {
     Object.entries(result).forEach(([analyseId, groups]) => {
       const div = document.createElement('div')
       const h1 = document.createElement('h1')

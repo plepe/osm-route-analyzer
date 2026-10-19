@@ -4,4 +4,12 @@ analyses:
       {{ this }};way(r);out geom;
     feature:
       group: |
-        {{ (tags.highway == "cycleway" and tags.segregated == "no" ? "mixed" : tags.highway)|default("other") }}
+        {% if tags.highway == "cycleway" and tags.segregated == "no" %}
+        mixed
+        {% elseif tags.bicycle_road == "yes" %}
+        bicycle_road
+        {% elseif tags.highway %}
+        {{ tags.highway }}
+        {% else %}
+        other
+        {% endif %}

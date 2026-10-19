@@ -17,10 +17,14 @@ module.exports = function analyse (def, data, callback) {
     const group = twigRender(def.feature.group, data).trim()
 
     if (!(group in groups)) {
-      groups[group] = 0
+      groups[group] = {
+        ids: [],
+        length: 0
+      }
     }
 
-    groups[group] += length
+    groups[group].ids.push(feature.id)
+    groups[group].length += length
   })
 
   callback(null, groups)

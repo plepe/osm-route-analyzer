@@ -27,7 +27,7 @@ window.onload = function app () {
 function showResult (dom, result) {
   const table = document.createElement('table')
 
-  Object.entries(result).forEach(([group, length]) => {
+  Object.entries(result).forEach(([group, data]) => {
     const tr = document.createElement('tr')
 
     let td = document.createElement('td')
@@ -35,7 +35,7 @@ function showResult (dom, result) {
     tr.appendChild(td)
 
     td = document.createElement('td')
-    td.innerHTML = length.toFixed(3) + ' km'
+    td.innerHTML = data.length.toFixed(3) + ' km'
     tr.appendChild(td)
 
     table.appendChild(tr)
